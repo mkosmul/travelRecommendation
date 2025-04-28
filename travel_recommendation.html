@@ -11,14 +11,16 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="contact.html">Contact Us</a></li>
         <input type="text" id="searchPhrase"/>
-        <input type="button" id="search" value="Search"/>
-        <input type="button" id="clear" value="Clear"/>
+        <input type="button" id="search" value="Search" onClick="search();"/>
+        <input type="button" id="clear" value="Clear" onClick="clearSearch();"/>
       </ul>
     </nav>
     <h1>Explore dream destinations
     </h1>
     <p>
     This is my travel website with description and all.
+    </p>
+    <p id="searchResults">
     </p>
     <p>
     Travel recommendation:<br/>
