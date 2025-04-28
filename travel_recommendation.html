@@ -1,13 +1,15 @@
 <html>
   <head>
     <title>Travel Recommendations</title>
+    <script src="travel_recommendation.js"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
-  <body style="background-image: url('background.jpg')">
+  <body onload="loadRecommendation();">
     <nav>
       <ul>
-        <li><a href="/travel_recommendation.html">Home</a></li>
-        <li><a href="/about.html">About Us</a></li>
-        <li><a href="/contact.html">Contact Us</a></li>
+        <li><a href="travel_recommendation.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
         <input type="text" id="searchPhrase"/>
         <input type="button" id="search" value="Search"/>
         <input type="button" id="clear" value="Clear"/>
@@ -17,6 +19,12 @@
     </h1>
     <p>
     This is my travel website with description and all.
+    </p>
+    <p>
+    Travel recommendation:<br/>
+    <b><span id="recoName">...</span></b><br/>
+    <span id="recoDescription">...</span><br/>
+    <img style="width: 30%" id="recoImg"/>
     </p>
   </body>
 </html>
