@@ -1,0 +1,17 @@
+body {
+    background-image: url('background.jpg');
+    background-size: 100%;
+}
+
+img {
+    width: 30%;
+    float: none;
+}
+
+div.result {
+    background-color: rgba(220, 220, 255, 0.7);
+}
+
+div.reco {
+    background-color: rgba(220, 255, 220, 0.7);
+}

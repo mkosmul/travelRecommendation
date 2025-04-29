@@ -11,7 +11,8 @@ function loadRecommendation() {
             var cities = json.countries.flatMap(country => country.cities);
             var selectedCity = cities[Math.floor(Math.random() * cities.length)];
             displayRecommendation(selectedCity);
-        });
+        })
+        .catch((e) => showError(e));
 }
 
 function clearSearchResults() {
@@ -19,26 +20,50 @@ function clearSearchResults() {
 }
 
 function clearSearch() {
-    document.getElementById("search").textContent = "";
+    document.getElementById("searchPhrase").value = "";
     clearSearchResults();
 }
 
 function appendSearchResults(recommendations) {
-    var resultList = document.getElementById("search");
-    for (reco of recommendations) {
-        resultList.appendChild(document.createElement("p")).append(document.createElement("b")).append(recommendation.name);
-        resultList.appendChild(document.createElement("p")).append(recommendation.description);
-        var img = resultList.appendChild(document.createElement("img"));
-        img.setAttribute("style", "width: 20%");
-        img.setAttribute("src", recommendation.imageUrl);
+    var resultList = document.getElementById("searchResults");
+    for (recommendation of recommendations) {
+        var wrapper = document.createElement("div");
+        wrapper.setAttribute("class", "result");
+        resultList.appendChild(wrapper);
+
+        if (recommendation.imageUrl) {
+            var img = wrapper.appendChild(document.createElement("img"));
+            img.setAttribute("style", "width: 20%");
+            img.setAttribute("src", recommendation.imageUrl);
+        }
+
+        var paragraph = wrapper.appendChild(document.createElement("p"));
+        var b = document.createElement("b");
+        paragraph.appendChild(b)
+        b.appendChild(document.createTextNode(recommendation.name));
+
+        if (recommendation.description) {
+            var paragraph2 = wrapper.appendChild(document.createElement("p"));
+            paragraph2.appendChild(document.createTextNode(recommendation.description));
+        }
     }
 }
 
-function search() {
+function showEmptyResults() {
+    appendSearchResults([ {name: "No results found"} ]);
+}
+
+function showError(e) {
+    appendSearchResults([ {name: "Error while fetching results"} ]);
+}
+
+async function search() {
     clearSearchResults();
-    var recommendations = fetch('travel_recommendation_api.json')
-        .then((response) => response.json());
-    var query = document.getElementById("search").textContent.toLowerCase();
+    var recommendations = await fetch('travel_recommendation_api.json')
+        .then((response) => response.json())
+        .catch((e) => showError(e));
+    console.log(recommendations);
+    var query = document.getElementById("searchPhrase").value.toLowerCase();
     switch(query) {
         case "beach":
         case "beaches":
@@ -50,7 +75,14 @@ function search() {
             break;
         case "country":
         case "countries":
-            appendSearchResults(recommendations.countries).flatMap(country => country.cities);
+            appendSearchResults(recommendations.countries.map(country => {
+                return {
+                    name: country.name,
+                    imageUrl: country.cities[0].imageUrl,
+                }
+            }));
             break;
+        default:
+            showEmptyResults();
     }
 }
