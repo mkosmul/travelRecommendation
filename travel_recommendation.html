@@ -6,14 +6,12 @@
   </head>
   <body onload="loadRecommendation();">
     <nav>
-      <ul>
-        <li><a href="travel_recommendation.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <input type="text" id="searchPhrase"/>
-        <input type="button" id="search" value="Search" onClick="search();"/>
-        <input type="button" id="clear" value="Clear" onClick="clearSearch();"/>
-      </ul>
+      <a href="travel_recommendation.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+      <input type="text" id="searchPhrase"/>
+      <input type="button" id="search" value="Search" onClick="search();"/>
+      <input type="button" id="clear" value="Clear" onClick="clearSearch();"/>
     </nav>
     <h1>Explore dream destinations
     </h1>
@@ -22,7 +20,7 @@
     </p>
     <div id="searchResults"></div>
     <p>
-    Travel recommendation:<br/>
+    A random travel recommendation:<br/>
     <div class="reco">
       <img id="recoImg"/>
       <p><b><span id="recoName">...</span></b></p>
